@@ -93,6 +93,16 @@ namespace Interpol.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back_right {
+            get {
+                object obj = ResourceManager.GetObject("back-right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap default_user_image {
             get {
                 object obj = ResourceManager.GetObject("default-user-image", resourceCulture);

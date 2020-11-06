@@ -94,11 +94,15 @@ namespace Interpol
                 command.Parameters.AddWithValue(@"Group_info", textBoxNotation.Text.ToString());
                 command.Parameters.AddWithValue(@"Group_activity_years", textBoxActYears.Text.ToString());
                 conn.Open();
-                try
+                if (MessageBox.Show("Изменение записи в таблице Группировки", "Подтвердите изменения", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                 {
-                    command.ExecuteNonQuery();
-                }catch(Exception ex) { MessageBox.Show("Не удалось обновить запись."); }
-                conn.Close();
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex) { MessageBox.Show("Не удалось обновить запись."); }
+                    conn.Close();
+                }
             }
             else
             {
@@ -112,14 +116,16 @@ namespace Interpol
                 command.Parameters.AddWithValue(@"Group_info", textBoxNotation.Text.ToString());
                 command.Parameters.AddWithValue(@"Group_activity_years", textBoxActYears.Text.ToString());
                 conn.Open();
-                try
+                if (MessageBox.Show("Добавление записи в таблицу Группировка", "Подтвердите добавление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                 {
-                    command.ExecuteNonQuery();
-                    this.groupCode = Convert.ToInt32(comm.ExecuteScalar());
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        this.groupCode = Convert.ToInt32(comm.ExecuteScalar());
+                    }
+                    catch (Exception ex) { MessageBox.Show("Не удалось добавить запись."); }
                 }
-                catch (Exception ex) { MessageBox.Show("Не удалось добавить запись."); }
-                conn.Close();         
-                Console.WriteLine(this.groupCode);
+                conn.Close();
                 loadAddLink(groupCode);
             }
         }

@@ -34,14 +34,18 @@
             this.buttonGroups = new System.Windows.Forms.Button();
             this.buttonMore = new System.Windows.Forms.Button();
             this.panelMore = new System.Windows.Forms.Panel();
+            this.buttonAddCrime = new System.Windows.Forms.Button();
             this.buttonAddCriminal = new System.Windows.Forms.Button();
             this.buttonAddUser = new System.Windows.Forms.Button();
-            this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonTableDead = new System.Windows.Forms.Button();
             this.buttonTableGaveUp = new System.Windows.Forms.Button();
             this.buttonMain = new System.Windows.Forms.Button();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelSearch = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.panelAddCriminal = new System.Windows.Forms.Panel();
             this.groupBoxDeath = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -87,6 +91,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panelAddCrime = new System.Windows.Forms.Panel();
+            this.buttonInsertCrime = new System.Windows.Forms.Button();
+            this.buttonHideAddCrimeMenu = new System.Windows.Forms.Button();
+            this.textBoxCrimeTerm = new System.Windows.Forms.TextBox();
+            this.textBoxCrimeDesc = new System.Windows.Forms.TextBox();
+            this.textBoxCrimeType = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupsTableAdapter = new Interpol.cardfileDataSetTableAdapters.GroupsTableAdapter();
             this.groupsCriminalsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -94,11 +107,13 @@
             this.groupsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panelNavAdmin.SuspendLayout();
             this.panelMore.SuspendLayout();
+            this.panelSearch.SuspendLayout();
             this.panelAddCriminal.SuspendLayout();
             this.groupBoxDeath.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardfileDataSet)).BeginInit();
+            this.panelAddCrime.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupsCriminalsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +125,6 @@
             this.panelNavAdmin.Controls.Add(this.buttonGroups);
             this.panelNavAdmin.Controls.Add(this.buttonMore);
             this.panelNavAdmin.Controls.Add(this.panelMore);
-            this.panelNavAdmin.Controls.Add(this.buttonSearch);
             this.panelNavAdmin.Controls.Add(this.buttonBack);
             this.panelNavAdmin.Controls.Add(this.buttonTableDead);
             this.panelNavAdmin.Controls.Add(this.buttonTableGaveUp);
@@ -126,9 +140,9 @@
             this.buttonGroups.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonGroups.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGroups.Location = new System.Drawing.Point(-3, 228);
+            this.buttonGroups.Location = new System.Drawing.Point(0, 171);
             this.buttonGroups.Name = "buttonGroups";
-            this.buttonGroups.Size = new System.Drawing.Size(195, 51);
+            this.buttonGroups.Size = new System.Drawing.Size(193, 51);
             this.buttonGroups.TabIndex = 8;
             this.buttonGroups.Text = "Группировки";
             this.buttonGroups.UseVisualStyleBackColor = true;
@@ -141,7 +155,7 @@
             this.buttonMore.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMore.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMore.Location = new System.Drawing.Point(0, 285);
+            this.buttonMore.Location = new System.Drawing.Point(-3, 228);
             this.buttonMore.Name = "buttonMore";
             this.buttonMore.Size = new System.Drawing.Size(195, 25);
             this.buttonMore.TabIndex = 7;
@@ -150,50 +164,53 @@
             // 
             // panelMore
             // 
+            this.panelMore.Controls.Add(this.buttonAddCrime);
             this.panelMore.Controls.Add(this.buttonAddCriminal);
             this.panelMore.Controls.Add(this.buttonAddUser);
-            this.panelMore.Location = new System.Drawing.Point(0, 310);
+            this.panelMore.Location = new System.Drawing.Point(0, 252);
             this.panelMore.Name = "panelMore";
-            this.panelMore.Size = new System.Drawing.Size(195, 244);
+            this.panelMore.Size = new System.Drawing.Size(195, 302);
             this.panelMore.TabIndex = 6;
             this.panelMore.Visible = false;
+            // 
+            // buttonAddCrime
+            // 
+            this.buttonAddCrime.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonAddCrime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddCrime.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAddCrime.Location = new System.Drawing.Point(-3, 114);
+            this.buttonAddCrime.Name = "buttonAddCrime";
+            this.buttonAddCrime.Size = new System.Drawing.Size(195, 51);
+            this.buttonAddCrime.TabIndex = 9;
+            this.buttonAddCrime.Text = "Добавить преступление";
+            this.buttonAddCrime.UseVisualStyleBackColor = true;
+            this.buttonAddCrime.Click += new System.EventHandler(this.buttonAddCrime_Click);
             // 
             // buttonAddCriminal
             // 
             this.buttonAddCriminal.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonAddCriminal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAddCriminal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddCriminal.Location = new System.Drawing.Point(-2, 52);
+            this.buttonAddCriminal.Location = new System.Drawing.Point(0, 57);
             this.buttonAddCriminal.Name = "buttonAddCriminal";
-            this.buttonAddCriminal.Size = new System.Drawing.Size(195, 51);
+            this.buttonAddCriminal.Size = new System.Drawing.Size(193, 51);
             this.buttonAddCriminal.TabIndex = 8;
             this.buttonAddCriminal.Text = "Добавить преступника";
             this.buttonAddCriminal.UseVisualStyleBackColor = true;
+            this.buttonAddCriminal.Click += new System.EventHandler(this.buttonAddCriminal_Click);
             // 
             // buttonAddUser
             // 
             this.buttonAddUser.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAddUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddUser.Location = new System.Drawing.Point(-3, 0);
+            this.buttonAddUser.Location = new System.Drawing.Point(0, 0);
             this.buttonAddUser.Name = "buttonAddUser";
-            this.buttonAddUser.Size = new System.Drawing.Size(195, 51);
+            this.buttonAddUser.Size = new System.Drawing.Size(191, 51);
             this.buttonAddUser.TabIndex = 7;
             this.buttonAddUser.Text = "Добавить пользователя";
             this.buttonAddUser.UseVisualStyleBackColor = true;
             this.buttonAddUser.Click += new System.EventHandler(this.buttonAddUser_Click);
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearch.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch.Location = new System.Drawing.Point(0, 57);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(195, 51);
-            this.buttonSearch.TabIndex = 4;
-            this.buttonSearch.Text = "Поиск";
-            this.buttonSearch.UseVisualStyleBackColor = true;
             // 
             // buttonBack
             // 
@@ -216,7 +233,7 @@
             this.buttonTableDead.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonTableDead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTableDead.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTableDead.Location = new System.Drawing.Point(0, 171);
+            this.buttonTableDead.Location = new System.Drawing.Point(-3, 114);
             this.buttonTableDead.Name = "buttonTableDead";
             this.buttonTableDead.Size = new System.Drawing.Size(195, 51);
             this.buttonTableDead.TabIndex = 2;
@@ -229,7 +246,7 @@
             this.buttonTableGaveUp.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonTableGaveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTableGaveUp.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTableGaveUp.Location = new System.Drawing.Point(0, 114);
+            this.buttonTableGaveUp.Location = new System.Drawing.Point(-4, 57);
             this.buttonTableGaveUp.Name = "buttonTableGaveUp";
             this.buttonTableGaveUp.Size = new System.Drawing.Size(195, 51);
             this.buttonTableGaveUp.TabIndex = 1;
@@ -254,11 +271,52 @@
             // 
             this.flowLayoutPanel.AutoScroll = true;
             this.flowLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(195, 0);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(195, 49);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(439, 661);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(939, 612);
             this.flowLayoutPanel.TabIndex = 3;
+            this.flowLayoutPanel.Click += new System.EventHandler(this.flowLayoutPanel_Click);
+            // 
+            // panelSearch
+            // 
+            this.panelSearch.BackColor = System.Drawing.Color.SlateGray;
+            this.panelSearch.Controls.Add(this.label19);
+            this.panelSearch.Controls.Add(this.buttonSearch);
+            this.panelSearch.Controls.Add(this.textBoxSearch);
+            this.panelSearch.Location = new System.Drawing.Point(195, 1);
+            this.panelSearch.Name = "panelSearch";
+            this.panelSearch.Size = new System.Drawing.Size(937, 50);
+            this.panelSearch.TabIndex = 0;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Location = new System.Drawing.Point(270, 15);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(226, 19);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Поиск по таблице \"Преступники\"";
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSearch.BackgroundImage")));
+            this.buttonSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearch.Location = new System.Drawing.Point(232, 9);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(32, 32);
+            this.buttonSearch.TabIndex = 1;
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSearch.Location = new System.Drawing.Point(5, 11);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(225, 28);
+            this.textBoxSearch.TabIndex = 0;
             // 
             // panelAddCriminal
             // 
@@ -711,6 +769,103 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Имя:";
             // 
+            // panelAddCrime
+            // 
+            this.panelAddCrime.BackColor = System.Drawing.Color.SlateGray;
+            this.panelAddCrime.Controls.Add(this.buttonInsertCrime);
+            this.panelAddCrime.Controls.Add(this.buttonHideAddCrimeMenu);
+            this.panelAddCrime.Controls.Add(this.textBoxCrimeTerm);
+            this.panelAddCrime.Controls.Add(this.textBoxCrimeDesc);
+            this.panelAddCrime.Controls.Add(this.textBoxCrimeType);
+            this.panelAddCrime.Controls.Add(this.label22);
+            this.panelAddCrime.Controls.Add(this.label21);
+            this.panelAddCrime.Controls.Add(this.label20);
+            this.panelAddCrime.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelAddCrime.Location = new System.Drawing.Point(328, 0);
+            this.panelAddCrime.Name = "panelAddCrime";
+            this.panelAddCrime.Size = new System.Drawing.Size(306, 661);
+            this.panelAddCrime.TabIndex = 0;
+            this.panelAddCrime.Visible = false;
+            // 
+            // buttonInsertCrime
+            // 
+            this.buttonInsertCrime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInsertCrime.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonInsertCrime.Location = new System.Drawing.Point(208, 310);
+            this.buttonInsertCrime.Name = "buttonInsertCrime";
+            this.buttonInsertCrime.Size = new System.Drawing.Size(88, 30);
+            this.buttonInsertCrime.TabIndex = 24;
+            this.buttonInsertCrime.Text = "Добавить";
+            this.buttonInsertCrime.UseVisualStyleBackColor = true;
+            this.buttonInsertCrime.Click += new System.EventHandler(this.buttonInsertCrime_Click);
+            // 
+            // buttonHideAddCrimeMenu
+            // 
+            this.buttonHideAddCrimeMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonHideAddCrimeMenu.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonHideAddCrimeMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonHideAddCrimeMenu.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHideAddCrimeMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideAddCrimeMenu.Image")));
+            this.buttonHideAddCrimeMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonHideAddCrimeMenu.Location = new System.Drawing.Point(0, 610);
+            this.buttonHideAddCrimeMenu.Name = "buttonHideAddCrimeMenu";
+            this.buttonHideAddCrimeMenu.Size = new System.Drawing.Size(306, 51);
+            this.buttonHideAddCrimeMenu.TabIndex = 23;
+            this.buttonHideAddCrimeMenu.Text = "Скрыть";
+            this.buttonHideAddCrimeMenu.UseVisualStyleBackColor = true;
+            this.buttonHideAddCrimeMenu.Click += new System.EventHandler(this.buttonHideAddCrimeMenu_Click);
+            // 
+            // textBoxCrimeTerm
+            // 
+            this.textBoxCrimeTerm.Location = new System.Drawing.Point(14, 260);
+            this.textBoxCrimeTerm.Name = "textBoxCrimeTerm";
+            this.textBoxCrimeTerm.Size = new System.Drawing.Size(282, 20);
+            this.textBoxCrimeTerm.TabIndex = 22;
+            // 
+            // textBoxCrimeDesc
+            // 
+            this.textBoxCrimeDesc.Location = new System.Drawing.Point(14, 200);
+            this.textBoxCrimeDesc.Name = "textBoxCrimeDesc";
+            this.textBoxCrimeDesc.Size = new System.Drawing.Size(282, 20);
+            this.textBoxCrimeDesc.TabIndex = 21;
+            // 
+            // textBoxCrimeType
+            // 
+            this.textBoxCrimeType.Location = new System.Drawing.Point(14, 140);
+            this.textBoxCrimeType.Name = "textBoxCrimeType";
+            this.textBoxCrimeType.Size = new System.Drawing.Size(282, 20);
+            this.textBoxCrimeType.TabIndex = 20;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Location = new System.Drawing.Point(47, 230);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(48, 19);
+            this.label22.TabIndex = 12;
+            this.label22.Text = "Срок:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label21.Location = new System.Drawing.Point(47, 170);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(184, 19);
+            this.label21.TabIndex = 11;
+            this.label21.Text = "Описание преступления:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.Location = new System.Drawing.Point(47, 110);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(141, 19);
+            this.label20.TabIndex = 10;
+            this.label20.Text = "Вид преступления:";
+            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
@@ -739,9 +894,11 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1134, 661);
-            this.Controls.Add(this.flowLayoutPanel);
-            this.Controls.Add(this.panelAddCriminal);
             this.Controls.Add(this.panelNavAdmin);
+            this.Controls.Add(this.panelAddCrime);
+            this.Controls.Add(this.panelAddCriminal);
+            this.Controls.Add(this.panelSearch);
+            this.Controls.Add(this.flowLayoutPanel);
             this.MaximumSize = new System.Drawing.Size(1150, 700);
             this.MinimumSize = new System.Drawing.Size(1150, 700);
             this.Name = "AdminForm";
@@ -750,6 +907,8 @@
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.panelNavAdmin.ResumeLayout(false);
             this.panelMore.ResumeLayout(false);
+            this.panelSearch.ResumeLayout(false);
+            this.panelSearch.PerformLayout();
             this.panelAddCriminal.ResumeLayout(false);
             this.panelAddCriminal.PerformLayout();
             this.groupBoxDeath.ResumeLayout(false);
@@ -757,6 +916,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardfileDataSet)).EndInit();
+            this.panelAddCrime.ResumeLayout(false);
+            this.panelAddCrime.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupsCriminalsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -765,7 +926,6 @@
 
         #endregion
         private System.Windows.Forms.Panel panelNavAdmin;
-        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Button buttonTableDead;
         private System.Windows.Forms.Button buttonTableGaveUp;
@@ -826,5 +986,19 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button buttonGroups;
         private System.Windows.Forms.Button buttonAddCriminal;
+        private System.Windows.Forms.Button buttonAddCrime;
+        private System.Windows.Forms.Panel panelAddCrime;
+        private System.Windows.Forms.TextBox textBoxCrimeTerm;
+        private System.Windows.Forms.TextBox textBoxCrimeDesc;
+        private System.Windows.Forms.TextBox textBoxCrimeType;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button buttonHideAddCrimeMenu;
+        private System.Windows.Forms.Button buttonInsertCrime;
+        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

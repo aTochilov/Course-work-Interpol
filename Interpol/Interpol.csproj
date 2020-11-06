@@ -63,7 +63,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +226,7 @@
     <Content Include="cardfile.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\back-right.png" />
     <None Include="Resources\edit.png" />
     <None Include="Resources\edit_icon.png" />
     <None Include="Resources\arrow-down01-512.png" />

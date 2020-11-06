@@ -84,8 +84,14 @@ namespace Interpol
                 command1.Parameters.AddWithValue("@rd", dateTimePickerRelease.Value.ToString());
                 command1.Parameters.AddWithValue("@notation", richTextBoxNotation.Text);
                 conn.Open();
-                command1.ExecuteNonQuery();
-                command.ExecuteNonQuery();
+                if (MessageBox.Show("Изменение записи в таблице Группировки", "Подтвердите изменения", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    try
+                    {
+                        command1.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }catch(Exception ex) { MessageBox.Show("Ошибка редактирования записи."); }
+                }
                 conn.Close();
             }
             else
@@ -106,7 +112,14 @@ namespace Interpol
             command1.Parameters.AddWithValue("@Notation", richTextBoxNotation.Text);
             command1.Parameters.AddWithValue(@"Criminal_code", CriminalCode);
             command1.Parameters.AddWithValue(@"Criminal_code", comboBoxCrimes.SelectedValue);
-            command1.ExecuteNonQuery();
+            if (MessageBox.Show("Изменение записи в таблице Группировки", "Подтвердите изменения", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+            {
+                try
+                {
+                    command1.ExecuteNonQuery();
+                }
+                catch (Exception ex) { MessageBox.Show("Ошибка редактирования записи."); }
+            }
             conn.Close();
         }
 
@@ -116,10 +129,3 @@ namespace Interpol
         }
     }
 }
-//string commText = "INSERT INTO Crimes (Crime_type, Crime_description, Crime_term) VALUES (?,?,?);";
-
-
-//OleDbCommand command = new OleDbCommand(commText, conn);
-//command.Parameters.AddWithValue(@"Crime_type", textBoxCrime.Text.ToString());
-//command.Parameters.AddWithValue(@"Crime_description", richTextBoxDesc.Text.ToString());
-//command.Parameters.AddWithValue(@"Crime_term", textBoxTerm.Text.ToString());

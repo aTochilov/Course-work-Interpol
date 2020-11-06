@@ -2,6 +2,7 @@
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
+using System.Security.AccessControl;
 using System.Windows.Forms;
 
 namespace Interpol
@@ -40,7 +41,7 @@ namespace Interpol
             try
             {
                 criminalCode = Convert.ToInt32(reader[0]);
-            }catch(Exception ex) { MessageBox.Show("Отсутсвуют записи в БД"); }
+            } catch (Exception ex) { MessageBox.Show("Отсутсвуют записи в БД"); }
             reader.Close();
             conn.Close();
             return criminalCode;
@@ -53,7 +54,11 @@ namespace Interpol
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-                string criminalName = Convert.ToString(reader[0]);           
+            string criminalName = "";
+            try
+            {
+                criminalName = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalName;
@@ -65,8 +70,12 @@ namespace Interpol
             OleDbCommand command = new OleDbCommand("SELECT Criminal_surname FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
+            string criminalSurname = "";
             reader.Read();
-            string criminalSurname = Convert.ToString(reader[0]);
+            try { 
+                criminalSurname = Convert.ToString(reader[0]);
+            }
+            catch (Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalSurname;
@@ -78,8 +87,12 @@ namespace Interpol
             OleDbCommand command = new OleDbCommand("SELECT Criminal_spec FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
+            string criminalSpec = "";
             reader.Read();
-            string criminalSpec = Convert.ToString(reader[0]);
+            try
+            {
+                criminalSpec = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalSpec;
@@ -91,8 +104,12 @@ namespace Interpol
             OleDbCommand command = new OleDbCommand("SELECT Criminal_residence FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
+            string criminalResidence = "";
             reader.Read();
-            string criminalResidence = Convert.ToString(reader[0]);
+            try
+            {
+                criminalResidence = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalResidence;
@@ -104,9 +121,13 @@ namespace Interpol
             OleDbCommand command = new OleDbCommand("SELECT Criminal_birth_date FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
+            string criminalBirthDate = "";
             reader.Read();
-            string criminalBirthDate = Convert.ToString(reader[0]);
-            criminalBirthDate = criminalBirthDate.Substring(0, criminalBirthDate.Length - 8);
+            try
+            {
+                criminalBirthDate = Convert.ToString(reader[0]);
+                criminalBirthDate = criminalBirthDate.Substring(0, criminalBirthDate.Length - 8);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalBirthDate;
@@ -118,8 +139,12 @@ namespace Interpol
             OleDbCommand command = new OleDbCommand("SELECT Criminal_photo FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
+            byte[] imageBytes = { };
             reader.Read();
-            byte[] imageBytes = (byte[])reader[0];
+            try
+            {
+                imageBytes = (byte[])reader[0];
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return imageBytes;
@@ -138,9 +163,13 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_nickname FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string criminalNickname = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string criminalNickname = Convert.ToString(reader[0]);
+            try
+            {
+                criminalNickname = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalNickname;
@@ -152,8 +181,12 @@ namespace Interpol
             OleDbCommand command = new OleDbCommand("SELECT Criminal_citizenship FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
             OleDbDataReader reader = command.ExecuteReader();
+            string criminalCitizenship = "";
             reader.Read();
-            string criminalCitizenship = Convert.ToString(reader[0]);
+            try
+            {
+                criminalCitizenship = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalCitizenship;
@@ -164,9 +197,14 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_birthplace FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string criminalBirthplace = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string criminalBirthplace = Convert.ToString(reader[0]);
+            try
+            {
+                criminalBirthplace = Convert.ToString(reader[0]);
+            }
+            catch (Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalBirthplace;
@@ -177,9 +215,13 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_eyes FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string criminalEyes = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string criminalEyes = Convert.ToString(reader[0]);
+            try
+            {
+                criminalEyes = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalEyes;
@@ -190,9 +232,13 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_hair FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string criminalHair = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string criminalHair = Convert.ToString(reader[0]);
+            try
+            {
+                criminalHair = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalHair;
@@ -203,9 +249,13 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_height FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string criminalHeight = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string criminalHeight = Convert.ToString(reader[0]);
+            try
+            {
+                criminalHeight = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalHeight;
@@ -216,9 +266,13 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_languages FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string criminalLanguages = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string criminalLanguages = Convert.ToString(reader[0]);
+            try
+            {
+                criminalLanguages = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalLanguages;
@@ -236,7 +290,7 @@ namespace Interpol
             {
                 criminalGroupName = Convert.ToString(reader[0]);
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
             reader.Close();
             conn.Close();
             return criminalGroupName;
@@ -290,7 +344,7 @@ namespace Interpol
             {
                 dd = Convert.ToString(reader[0]);
                 dd = dd.Substring(0, dd.Length - 8);
-            }catch(Exception ex) { }
+            } catch (Exception ex) { }
             reader.Close();
             conn.Close();
             return dd;
@@ -301,9 +355,14 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_death_place FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string dp = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string dp = Convert.ToString(reader[0]);
+            try
+            {
+                dp = Convert.ToString(reader[0]);
+            }
+            catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return dp;
@@ -314,9 +373,13 @@ namespace Interpol
             OleDbConnection conn = new OleDbConnection(connString);
             OleDbCommand command = new OleDbCommand("SELECT Criminal_death_circs FROM Criminals WHERE Criminal_code = " + criminalCode, conn);
             conn.Open();
+            string dc = "";
             OleDbDataReader reader = command.ExecuteReader();
             reader.Read();
-            string dc = Convert.ToString(reader[0]);
+            try
+            {
+                dc = Convert.ToString(reader[0]);
+            }catch(Exception ex) { }
             reader.Close();
             conn.Close();
             return dc;
@@ -325,35 +388,37 @@ namespace Interpol
         public string loadSentences(int criminalCode)
         {
             string sentences = "";
-            
+
             OleDbConnection conn = new OleDbConnection(connString);
-            OleDbCommand commandSentence = new OleDbCommand("SELECT Sentence_date, Release_date, Notation, Sentence_code, Crime_code FROM Sentence WHERE Criminal_code = "+ criminalCode, conn);
-            
+            OleDbCommand commandSentence = new OleDbCommand("SELECT Sentence_date, Release_date, Notation, Sentence_code, Crime_code FROM Sentence WHERE Criminal_code = " + criminalCode, conn);
+
             conn.Open();
             OleDbDataReader readerSentence = commandSentence.ExecuteReader();
-           
+
             while (readerSentence.Read()) {
-                int Crime_code = Convert.ToInt32(readerSentence[4]);
-                OleDbCommand commandCrime = new OleDbCommand("SELECT Crime_type, Crime_description, Crime_term FROM Crimes WHERE Crime_code = " + Crime_code, conn);
-                OleDbDataReader readerCrime = commandCrime.ExecuteReader();
-                readerCrime.Read();
-                sentences += "Преступление: ";
-                sentences = sentences + Convert.ToString(readerCrime[0]);
-                sentences += "\nОписание: ";
-                sentences = sentences + Convert.ToString(readerCrime[1]);
-                sentences += "\nСрок: ";
-                sentences = sentences + Convert.ToString(readerCrime[2]);
-                sentences += "\nДата приговора: ";
-                sentences = sentences + Convert.ToString(readerSentence[0]).Substring(0, Convert.ToString(readerSentence[0]).Length-8);
-                sentences += "\nДата освобождения: ";
-                sentences = sentences + Convert.ToString(readerSentence[1]).Substring(0, Convert.ToString(readerSentence[1]).Length-8);
-                sentences += "\nПримечания: ";
-                sentences = sentences + Convert.ToString(readerSentence[2]);
-                sentences += "\n\n";
-                readerCrime.Close();
+                try
+                {
+                    int Crime_code = Convert.ToInt32(readerSentence[4]);
+                    OleDbCommand commandCrime = new OleDbCommand("SELECT Crime_type, Crime_description, Crime_term FROM Crimes WHERE Crime_code = " + Crime_code, conn);
+                    OleDbDataReader readerCrime = commandCrime.ExecuteReader();
+                    readerCrime.Read();
+                    sentences += "Преступление: ";
+                    sentences = sentences + Convert.ToString(readerCrime[0]);
+                    sentences += "\nОписание: ";
+                    sentences = sentences + Convert.ToString(readerCrime[1]);
+                    sentences += "\nСрок: ";
+                    sentences = sentences + Convert.ToString(readerCrime[2]);
+                    sentences += "\nДата приговора: ";
+                    sentences = sentences + Convert.ToString(readerSentence[0]).Substring(0, Convert.ToString(readerSentence[0]).Length - 8);
+                    sentences += "\nДата освобождения: ";
+                    sentences = sentences + Convert.ToString(readerSentence[1]).Substring(0, Convert.ToString(readerSentence[1]).Length - 8);
+                    sentences += "\nПримечания: ";
+                    sentences = sentences + Convert.ToString(readerSentence[2]);
+                    sentences += "\n\n";
+                    readerCrime.Close();
+                }catch(Exception ex) { }
             }
             readerSentence.Close();
-            
             conn.Close();
             return sentences;
         }
@@ -386,6 +451,38 @@ namespace Interpol
             }
             return criminals;
         }
-           
+
+        public Criminal[] searchResult(string whereCondition)
+        {
+             Criminal[] criminals = new Criminal[10000];
+            int criminal = 0;
+            string commText = "SELECT * FROM Criminals WHERE "+ whereCondition+" ;";
+            OleDbConnection conn = new OleDbConnection(connString);
+            OleDbCommand command = new OleDbCommand(commText, conn);
+            conn.Open();
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                try
+                {
+                    MemoryStream ms = new MemoryStream();
+                    ms.Write((byte[])reader[16], 0, ((byte[])reader[16]).Length);
+                    criminals[criminal] = new Criminal
+                    {
+                        name = reader[1].ToString(),
+                        surname = reader[2].ToString(),
+                        nickname = reader[3].ToString(),
+                        specialization = reader[15].ToString(),
+                        residence = reader[10].ToString(),
+                        date = reader[4].ToString().Substring(0, reader[4].ToString().Length - 8),
+                        image = new Bitmap(ms),
+                        code = Convert.ToInt32(reader[0])
+                    };
+                }
+                catch(Exception ex) { Console.WriteLine("Ошибка при выполнении поиска."); }
+            }
+            return criminals;
+        }
+
     }
 }

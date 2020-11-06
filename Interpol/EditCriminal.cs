@@ -15,7 +15,7 @@ namespace Interpol
 {
     public partial class EditCriminal : Form
     {
-        Admin admin = new Admin();
+        User user = new User();
         static string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\cardfile.mdb";
         string fileName = "";
 
@@ -36,24 +36,24 @@ namespace Interpol
 
         private void fillDetails()
         {
-            textBoxName.Text = admin.loadName(criminalCode);
-            textBoxSurname.Text = admin.loadSurname(criminalCode);
-            textBoxNickname.Text = admin.loadNickname(criminalCode);
-            comboBoxGroup.Text = admin.loadGroupName(criminalCode);
-            textBoxSpec.Text = admin.loadSpec(criminalCode);
-            textBoxResidence.Text = admin.loadResidence(criminalCode);
-            dateTimePickerBirth.Text = admin.loadDate(criminalCode);
-            textBoxBirthPlace.Text = admin.loadBirthplace(criminalCode);
-            textBoxCitizenship.Text = admin.loadCitizenship(criminalCode);
-            textBoxEyes.Text = admin.loadEyes(criminalCode);
-            textBoxHair.Text = admin.loadHair(criminalCode);
-            numericUpDownHeight.Text = admin.loadHeight(criminalCode);
-            textBoxLang.Text = admin.loadLanguages(criminalCode);
-            checkBoxGaveUp.Checked = admin.loadGaveUp(criminalCode);
-            checkBoxIsDead.Checked = admin.loadIsDead(criminalCode);
-            dateTimePickerDeath.Text = admin.loadDeathDate(criminalCode);
-            textBoxDeathPlace.Text = admin.loadDeathPlace(criminalCode);
-            textBoxDeathCircs.Text = admin.loadDeathCircs(criminalCode);
+            textBoxName.Text = user.loadName(criminalCode);
+            textBoxSurname.Text = user.loadSurname(criminalCode);
+            textBoxNickname.Text = user.loadNickname(criminalCode);
+            comboBoxGroup.Text = user.loadGroupName(criminalCode);
+            textBoxSpec.Text = user.loadSpec(criminalCode);
+            textBoxResidence.Text = user.loadResidence(criminalCode);
+            dateTimePickerBirth.Text = user.loadDate(criminalCode);
+            textBoxBirthPlace.Text = user.loadBirthplace(criminalCode);
+            textBoxCitizenship.Text = user.loadCitizenship(criminalCode);
+            textBoxEyes.Text = user.loadEyes(criminalCode);
+            textBoxHair.Text = user.loadHair(criminalCode);
+            numericUpDownHeight.Text = user.loadHeight(criminalCode);
+            textBoxLang.Text = user.loadLanguages(criminalCode);
+            checkBoxGaveUp.Checked = user.loadGaveUp(criminalCode);
+            checkBoxIsDead.Checked = user.loadIsDead(criminalCode);
+            dateTimePickerDeath.Text = user.loadDeathDate(criminalCode);
+            textBoxDeathPlace.Text = user.loadDeathPlace(criminalCode);
+            textBoxDeathCircs.Text = user.loadDeathCircs(criminalCode);
             Sentence[] sentences = displaySentence(criminalCode); 
             foreach (Sentence sentence in sentences)
             {
@@ -103,7 +103,7 @@ namespace Interpol
             }
             else
             {
-                imageArr = admin.imageArray(criminalCode);
+                imageArr = user.imageArray(criminalCode);
             }
             string infoDead = ", Criminal_death_date = @dd, Criminal_death_place = @dp, Criminal_death_circs = @dc  WHERE Criminal_code = " + criminalCode + "; ";
             string infoAlive = ", Criminal_death_date = NULL, Criminal_death_place = NULL, Criminal_death_circs = NULL  WHERE Criminal_code = " + criminalCode + "; ";
@@ -140,7 +140,13 @@ namespace Interpol
             command.Parameters.AddWithValue("@dp", textBoxDeathPlace.Text);
             command.Parameters.AddWithValue("@dc", textBoxDeathCircs.Text);
             conn.Open();
-                command.ExecuteNonQuery();
+            if (MessageBox.Show("Изменение записи в таблице Преступники", "Подтвердите изменения", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+            {
+                try
+                {
+                    command.ExecuteNonQuery();
+                }catch(Exception ex) { MessageBox.Show("Ошибка изменения записи."); }
+            }
             conn.Close();
             memoryStream.Dispose();
         }

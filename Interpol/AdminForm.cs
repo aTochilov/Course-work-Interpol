@@ -9,7 +9,7 @@ namespace Interpol
 {
     public partial class AdminForm : Form
     {
-        Admin admin = new Admin();
+        User user = new User();
         static string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\cardfile.mdb";
         string fileName = @".\default-user-image.png";
         public AdminForm()
@@ -32,11 +32,6 @@ namespace Interpol
             List<Form> openForms = new List<Form>();
             foreach (Form f in Application.OpenForms)
                 openForms.Add(f);
-
-            foreach (Form f in openForms)
-            {
-                Console.WriteLine(f.Name);
-            }
 
         }
 
@@ -63,7 +58,7 @@ namespace Interpol
 
         private void buttonAddUser_Click(object sender, EventArgs e)
         {
-
+            panelAddCrime.Visible = false;
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -73,7 +68,7 @@ namespace Interpol
 
         private void displayCriminals()
         {
-            Criminal[] criminals = admin.getAliveCriminals();
+            Criminal[] criminals = user.getAliveCriminals();
             foreach (Criminal criminal in criminals)
             {
                 flowLayoutPanel.Controls.Add(criminal);
@@ -83,64 +78,67 @@ namespace Interpol
 
         private void buttonTableGaveUp_Click(object sender, EventArgs e)
         {
+            panelAddCrime.Visible = false;
             panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
-            int criminalCode = admin.getFirstCriminalCode();
+            int criminalCode = user.getFirstCriminalCode();
             Criminal[] criminals = new Criminal[1000000];
             int criminal = 0;
             do
             {
-                if (admin.loadGaveUp(criminalCode) == true)
+                if (user.loadGaveUp(criminalCode) == true)
                 {
                     criminals[criminal] = new Criminal
                     {
-                        name = admin.loadName(criminalCode),
-                        surname = admin.loadSurname(criminalCode),
-                        nickname = admin.loadNickname(criminalCode),
-                        specialization = admin.loadSpec(criminalCode),
-                        residence = admin.loadResidence(criminalCode),
-                        date = admin.loadDate(criminalCode),
-                        image = admin.loadPhoto(criminalCode),
+                        name = user.loadName(criminalCode),
+                        surname = user.loadSurname(criminalCode),
+                        nickname = user.loadNickname(criminalCode),
+                        specialization = user.loadSpec(criminalCode),
+                        residence = user.loadResidence(criminalCode),
+                        date = user.loadDate(criminalCode),
+                        image = user.loadPhoto(criminalCode),
                         code = criminalCode
                     };
                     flowLayoutPanel.Controls.Add(criminals[criminal]);
                 }
                 criminal++;
                 criminalCode++;
-            } while (criminal < admin.getNumberOfRows());
+            } while (criminal < user.getNumberOfRows());
         }
 
         private void buttonTableDead_Click(object sender, EventArgs e)
         {
+            panelAddCrime.Visible = false;
             panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
-            int criminalCode = admin.getFirstCriminalCode();
+            int criminalCode = user.getFirstCriminalCode();
             Criminal[] criminals = new Criminal[1000000];
             int criminal = 0;
             do
             {
-                if (admin.loadIsDead(criminalCode) == true)
+                if (user.loadIsDead(criminalCode) == true)
                 {
                     criminals[criminal] = new Criminal
                     {
-                        name = admin.loadName(criminalCode),
-                        surname = admin.loadSurname(criminalCode),
-                        nickname = admin.loadNickname(criminalCode),
-                        specialization = admin.loadSpec(criminalCode),
-                        residence = admin.loadResidence(criminalCode),
-                        date = admin.loadDate(criminalCode),
-                        image = admin.loadPhoto(criminalCode),
+                        name = user.loadName(criminalCode),
+                        surname = user.loadSurname(criminalCode),
+                        nickname = user.loadNickname(criminalCode),
+                        specialization = user.loadSpec(criminalCode),
+                        residence = user.loadResidence(criminalCode),
+                        date = user.loadDate(criminalCode),
+                        image = user.loadPhoto(criminalCode),
                         code = criminalCode
                     };
                     flowLayoutPanel.Controls.Add(criminals[criminal]);
                 }
                 criminal++;
                 criminalCode++;
-            } while (criminal < admin.getNumberOfRows());
+            } while (criminal < user.getNumberOfRows());
         }
 
         private void buttonMain_Click(object sender, EventArgs e)
         {
+            panelAddCrime.Visible = false;
             panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
             displayCriminals();
@@ -148,6 +146,7 @@ namespace Interpol
 
         private void buttonAddCriminal_Click(object sender, EventArgs e)
         {
+            panelAddCrime.Visible = false;
             if (panelAddCriminal.Visible == true)
                 panelAddCriminal.Visible = false;
             else panelAddCriminal.Visible = true;
@@ -218,10 +217,14 @@ namespace Interpol
             command.Parameters.Add(new OleDbParameter(@"Criminal_death_place", textBoxDeathPlace.Text.ToString()));
             command.Parameters.AddWithValue(@"Criminal_death_circs", textBoxDeathCircs.Text.ToString());
             conn.Open();
-            try
+            if (MessageBox.Show("Добавление записи в таблицу Преступники", "Добавить запись?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
             {
-                command.ExecuteNonQuery();
-            }catch(Exception ex) { MessageBox.Show("Ошибка!"); }
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { MessageBox.Show("Ошибка при добавлении записи."); }
+            }
             conn.Close();
             memoryStream.Dispose();
         }
@@ -278,6 +281,7 @@ namespace Interpol
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
+            panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
             byte group = 0;
             Group[] groups = new Group[127];
@@ -301,6 +305,71 @@ namespace Interpol
             conn.Close();
             Group addGroup = new Group(true);
             flowLayoutPanel.Controls.Add(addGroup);
+        }
+
+        private void flowLayoutPanel_Click(object sender, EventArgs e)
+        {
+            panelAddCriminal.Visible = false;
+            panelAddCrime.Visible = false;
+        }
+
+
+
+        private void buttonAddCrime_Click(object sender, EventArgs e)
+        {
+            panelAddCrime.Visible = true;
+            panelAddCriminal.Visible = false;
+        }
+
+        private void buttonHideAddCrimeMenu_Click(object sender, EventArgs e)
+        {
+            panelAddCrime.Visible = false;
+        }
+
+        private void buttonInsertCrime_Click(object sender, EventArgs e)
+        {
+            string comm = "INSERT INTO Crimes (Crime_type, Crime_term, Crime_description) VALUES (?,?,?);";
+            OleDbConnection connection = new OleDbConnection(connString);
+            OleDbCommand command = new OleDbCommand(comm, connection);
+            command.Parameters.AddWithValue(@"Crime_type", textBoxCrimeType.Text.ToString());
+            command.Parameters.AddWithValue(@"Crime_term", textBoxCrimeTerm.Text.ToString());
+            command.Parameters.AddWithValue(@"Crime_desc", textBoxCrimeDesc.Text.ToString());
+            connection.Open();
+            if (MessageBox.Show("Добавление записи в таблицу Преступления", "Добавить запись?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+            {
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { MessageBox.Show("Ошибка при добавлении записи."); }
+            }
+            connection.Close();
+        }
+
+        private void buttonShowSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel.Controls.Clear();
+            panelAddCriminal.Visible = false;
+            panelAddCrime.Visible = false;
+            panelSearch.Visible = true;
+            string[] columName = { "Criminal_code", "Criminal_name", "Criminal_surname", "Criminal_nickname",
+                                    "Criminal_birth_date", "Criminal_height", "Criminal_eyes", "Criminal_hair",
+                                    "Criminal_citizenship", "Criminal_birthplace", "Criminal_residence", "Criminal_languages",
+                                    "Criminal_death_date","Criminal_death_place","Criminal_spec"};
+            for (byte i = 0; i < columName.Length; i++)
+            {
+                Criminal[] criminals = user.searchResult(columName[i] + " LIKE '%" + textBoxSearch.Text.ToString() + "%' ");
+                foreach (Criminal criminal in criminals)
+                {
+                    flowLayoutPanel.Controls.Add(criminal);
+                }
+            }
+
         }
     }
 }
