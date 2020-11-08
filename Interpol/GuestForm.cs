@@ -1,14 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.OleDb;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Interpol
@@ -30,13 +21,10 @@ namespace Interpol
             
         }
 
-
         private void GuestForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
-
-
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
@@ -65,59 +53,21 @@ namespace Interpol
         private void buttonTableGaveUp_Click(object sender, EventArgs e)
         {
             flowLayoutPanelCriminals.Controls.Clear();
-            int criminalCode = user.getFirstCriminalCode();
-            Criminal[] criminals = new Criminal[1000000];
-            int criminal = 0;
-            do
+            Criminal[] criminals = user.getGaveUpCriminals();
+            foreach (Criminal criminal in criminals)
             {
-                if (user.loadGaveUp(criminalCode) == true)
-                {
-                    criminals[criminal] = new Criminal
-                    {
-                        name = user.loadName(criminalCode),
-                        surname = user.loadSurname(criminalCode),
-                        nickname = user.loadNickname(criminalCode),
-                        specialization = user.loadSpec(criminalCode),
-                        residence = user.loadResidence(criminalCode),
-                        date = user.loadDate(criminalCode),
-                        image = user.loadPhoto(criminalCode),
-                        code = criminalCode
-                    };
-                    Console.WriteLine(criminalCode);
-                    flowLayoutPanelCriminals.Controls.Add(criminals[criminal]); 
-                }
-                criminal++;
-                criminalCode++;
-            } while (criminal < user.getNumberOfRows());
+                flowLayoutPanelCriminals.Controls.Add(criminal);
+            }
         }
 
         private void buttonTableDead_Click(object sender, EventArgs e)
         {
             flowLayoutPanelCriminals.Controls.Clear();
-            int criminalCode = user.getFirstCriminalCode();
-            Criminal[] criminals = new Criminal[1000000];
-            int criminal = 0;
-            do
+            Criminal[] criminals = user.getDeadCriminals();
+            foreach (Criminal criminal in criminals)
             {
-                if (user.loadIsDead(criminalCode) == true)
-                {
-                    criminals[criminal] = new Criminal
-                    {
-                        name = user.loadName(criminalCode),
-                        surname = user.loadSurname(criminalCode),
-                        nickname = user.loadNickname(criminalCode),
-                        specialization = user.loadSpec(criminalCode),
-                        residence = user.loadResidence(criminalCode),
-                        date = user.loadDate(criminalCode),
-                        image = user.loadPhoto(criminalCode),
-                        code = criminalCode
-                    };
-                    Console.WriteLine(criminalCode);
-                    flowLayoutPanelCriminals.Controls.Add(criminals[criminal]);
-                }
-                criminal++;
-                criminalCode++;
-            } while (criminal < user.getNumberOfRows());
+                flowLayoutPanelCriminals.Controls.Add(criminal);
+            }
         }
 
         private void buttonMain_Click(object sender, EventArgs e)
@@ -126,5 +76,32 @@ namespace Interpol
             displayCriminals();
         }
 
+        private void buttonGroups_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelCriminals.Controls.Clear();
+            Group[] groups = user.getGroups();
+            foreach (Group group in groups)
+            {
+                flowLayoutPanelCriminals.Controls.Add(group);
+            }
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+
+            flowLayoutPanelCriminals.Controls.Clear();
+            string[] columName = { "Criminal_code", "Criminal_name", "Criminal_surname", "Criminal_nickname",
+                                    "Criminal_birth_date", "Criminal_height", "Criminal_eyes", "Criminal_hair",
+                                    "Criminal_citizenship", "Criminal_birthplace", "Criminal_residence", "Criminal_languages",
+                                    "Criminal_death_date","Criminal_death_place","Criminal_spec"};
+            for (byte i = 0; i < columName.Length; i++)
+            {
+                Criminal[] criminals = user.searchResult(columName[i] + " LIKE '%" + textBoxSearch.Text.ToString() + "%' ");
+                foreach (Criminal criminal in criminals)
+                {
+                    flowLayoutPanelCriminals.Controls.Add(criminal);
+                }
+            }
+        }
     }
 }

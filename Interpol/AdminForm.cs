@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Scrypt;
 
 namespace Interpol
 {
     public partial class AdminForm : Form
     {
         User user = new User();
-        static string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\cardfile.mdb";
-        string fileName = @".\default-user-image.png";
+        private string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\cardfile.mdb";
+        private string path = @".\users.dat";
+        private string fileName = @".\default-user-image.png";
         public AdminForm()
         {
             InitializeComponent();
@@ -56,9 +60,11 @@ namespace Interpol
             else panelMore.Visible = true;
         }
 
-        private void buttonAddUser_Click(object sender, EventArgs e)
+        private void buttonShowAddUser_Click(object sender, EventArgs e)
         {
             panelAddCrime.Visible = false;
+            panelAddCriminal.Visible = false;
+            panelAddUser.Visible = true;
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -75,69 +81,35 @@ namespace Interpol
             }
         }
 
-
         private void buttonTableGaveUp_Click(object sender, EventArgs e)
         {
+            panelAddUser.Visible = false;
             panelAddCrime.Visible = false;
             panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
-            int criminalCode = user.getFirstCriminalCode();
-            Criminal[] criminals = new Criminal[1000000];
-            int criminal = 0;
-            do
+            Criminal[] criminals = user.getGaveUpCriminals();
+            foreach (Criminal criminal in criminals)
             {
-                if (user.loadGaveUp(criminalCode) == true)
-                {
-                    criminals[criminal] = new Criminal
-                    {
-                        name = user.loadName(criminalCode),
-                        surname = user.loadSurname(criminalCode),
-                        nickname = user.loadNickname(criminalCode),
-                        specialization = user.loadSpec(criminalCode),
-                        residence = user.loadResidence(criminalCode),
-                        date = user.loadDate(criminalCode),
-                        image = user.loadPhoto(criminalCode),
-                        code = criminalCode
-                    };
-                    flowLayoutPanel.Controls.Add(criminals[criminal]);
-                }
-                criminal++;
-                criminalCode++;
-            } while (criminal < user.getNumberOfRows());
+                flowLayoutPanel.Controls.Add(criminal);
+            }
         }
 
         private void buttonTableDead_Click(object sender, EventArgs e)
         {
+            panelAddUser.Visible = false;
             panelAddCrime.Visible = false;
             panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
-            int criminalCode = user.getFirstCriminalCode();
-            Criminal[] criminals = new Criminal[1000000];
-            int criminal = 0;
-            do
+            Criminal[] criminals = user.getDeadCriminals();
+            foreach (Criminal criminal in criminals)
             {
-                if (user.loadIsDead(criminalCode) == true)
-                {
-                    criminals[criminal] = new Criminal
-                    {
-                        name = user.loadName(criminalCode),
-                        surname = user.loadSurname(criminalCode),
-                        nickname = user.loadNickname(criminalCode),
-                        specialization = user.loadSpec(criminalCode),
-                        residence = user.loadResidence(criminalCode),
-                        date = user.loadDate(criminalCode),
-                        image = user.loadPhoto(criminalCode),
-                        code = criminalCode
-                    };
-                    flowLayoutPanel.Controls.Add(criminals[criminal]);
-                }
-                criminal++;
-                criminalCode++;
-            } while (criminal < user.getNumberOfRows());
+                flowLayoutPanel.Controls.Add(criminal);
+            }
         }
 
         private void buttonMain_Click(object sender, EventArgs e)
         {
+            panelAddUser.Visible = false;
             panelAddCrime.Visible = false;
             panelAddCriminal.Visible = false;
             flowLayoutPanel.Controls.Clear();
@@ -146,6 +118,7 @@ namespace Interpol
 
         private void buttonAddCriminal_Click(object sender, EventArgs e)
         {
+            panelAddUser.Visible = false;
             panelAddCrime.Visible = false;
             if (panelAddCriminal.Visible == true)
                 panelAddCriminal.Visible = false;
@@ -179,7 +152,6 @@ namespace Interpol
 
         private void insertCriminal()
         {
-             
             MemoryStream memoryStream = new MemoryStream();
             Image image = Image.FromFile(fileName);
             image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
@@ -282,27 +254,14 @@ namespace Interpol
         private void buttonGroups_Click(object sender, EventArgs e)
         {
             panelAddCriminal.Visible = false;
+            panelAddCrime.Visible = false;
+            panelAddUser.Visible = false;
             flowLayoutPanel.Controls.Clear();
-            byte group = 0;
-            Group[] groups = new Group[127];
-            OleDbConnection conn = new OleDbConnection(connString);
-            OleDbCommand commandGroups = new OleDbCommand("SELECT Group_code, Group_name, Group_leader, Group_info, Group_activity_years FROM Groups ;", conn);
-            conn.Open();
-            OleDbDataReader readerGroups = commandGroups.ExecuteReader();
-            while (readerGroups.Read())
+            Group[] groups = user.getGroups();
+            foreach (Group group in groups)
             {
-                groups[group] = new Group();
-                groups[group].GroupCode = Convert.ToInt32(readerGroups[0]);
-                groups[group].GroupName = Convert.ToString(readerGroups[1]);
-                groups[group].GroupLeader = Convert.ToString(readerGroups[2]);
-                groups[group].GroupInfo = Convert.ToString(readerGroups[3]);
-                groups[group].GroupActYears = Convert.ToString(readerGroups[4]);
-                groups[group].loadLinks(Convert.ToInt32(readerGroups[0]));
-                flowLayoutPanel.Controls.Add(groups[group]);
-                group++;
+                flowLayoutPanel.Controls.Add(group);
             }
-            readerGroups.Close();
-            conn.Close();
             Group addGroup = new Group(true);
             flowLayoutPanel.Controls.Add(addGroup);
         }
@@ -311,14 +270,15 @@ namespace Interpol
         {
             panelAddCriminal.Visible = false;
             panelAddCrime.Visible = false;
+            panelAddUser.Visible = false;
         }
-
-
 
         private void buttonAddCrime_Click(object sender, EventArgs e)
         {
             panelAddCrime.Visible = true;
             panelAddCriminal.Visible = false;
+            panelAddUser.Visible = false;
+
         }
 
         private void buttonHideAddCrimeMenu_Click(object sender, EventArgs e)
@@ -346,16 +306,12 @@ namespace Interpol
             connection.Close();
         }
 
-        private void buttonShowSearch_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             flowLayoutPanel.Controls.Clear();
             panelAddCriminal.Visible = false;
             panelAddCrime.Visible = false;
+            panelAddUser.Visible = false;
             panelSearch.Visible = true;
             string[] columName = { "Criminal_code", "Criminal_name", "Criminal_surname", "Criminal_nickname",
                                     "Criminal_birth_date", "Criminal_height", "Criminal_eyes", "Criminal_hair",
@@ -370,6 +326,133 @@ namespace Interpol
                 }
             }
 
+        }
+
+        private void buttonHideAddUser_Click(object sender, EventArgs e)
+        {
+            panelAddUser.Visible = false;
+        }
+
+        private void buttonShowDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (labelUser.Text == "Добавление пользователя:")
+            {
+                groupBoxLevel.Visible = false;
+                buttonShowDeleteUser.Text = "Добавить пользователя";
+                labelUser.Text = "Удаление пользователя:";
+                buttonDeleteUser.Visible = true;
+                buttonAddUser.Visible = false;
+            }
+            else
+            {
+                groupBoxLevel.Visible = true;
+                buttonShowDeleteUser.Text = "Удалить пользователя";
+                labelUser.Text = "Добавление пользователя:";
+                buttonDeleteUser.Visible = false;
+                buttonAddUser.Visible = true;
+            }
+        }
+
+        private bool checkLogin(string[] logins, string login)
+        {
+            foreach (string line in logins)
+            {
+                if((line.Split(':')[0]) == login)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        async Task addUser(string login, string password, byte level)
+        {
+            if ((textBoxLogin.TextLength != 0) && (textBoxPassword.TextLength != 0)) {
+                ScryptEncoder encoder = new ScryptEncoder();
+                string hashedPassw = encoder.Encode(password);
+                string[] lines;
+                if (!File.Exists(path))
+                {
+                    MessageBox.Show("File not found.");
+                }
+                else
+                {
+                    lines = File.ReadAllLines(path);
+                    if (!checkLogin(lines, login))
+                    {
+                        using (FileStream fstream = new FileStream(path, FileMode.Append))
+                        {
+                            byte[] array = System.Text.Encoding.Default.GetBytes(login + ":" + hashedPassw + ":" + level + Environment.NewLine);
+                            // асинхронная запись массива байтов в файл
+                            await fstream.WriteAsync(array, 0, array.Length);
+                            fstream.Close();
+                        }
+                    }
+                    else MessageBox.Show("Пользователь с таким логином существует.");
+                }
+            }
+        }
+
+        private async void buttonAddUser_Click(object sender, EventArgs e)
+        {
+            byte selectedLevel = 1;
+            if (radioButtonLevel2.Checked == true) selectedLevel = 2;
+            await addUser(textBoxLogin.Text.ToString(), textBoxPassword.Text.ToString(), selectedLevel);
+            textBoxLogin.Clear();
+            textBoxPassword.Clear();
+            radioButtonLevel1.Checked = true;
+        }
+
+        private void buttonShowPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.PasswordChar = '\0';
+        }
+
+        private void buttonShowPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.PasswordChar = '*';
+        }
+
+        void deleteUser(string login, string password)
+        {
+            ScryptEncoder encoder = new ScryptEncoder();
+            string[] lines;
+            if (!File.Exists(path))
+            {
+                MessageBox.Show("File not found.");
+            }
+            else
+            {
+                string tempFile = Path.GetTempFileName();
+                using (var sr = new StreamReader(path))
+                using (var sw = new StreamWriter(tempFile))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        try
+                        {
+                            string[] arr = line.Split(':');
+                            string hashedPassword = arr[1];
+                            if ((login == arr[0]) && encoder.Compare(password, hashedPassword))
+                            {
+                                MessageBox.Show(login + " был удален.");
+                                continue;
+                            }
+                            else sw.WriteLine(line);
+                        }catch(Exception ex) { MessageBox.Show("При удалении"); }
+                    }
+                }
+                File.Delete(path);
+                File.Move(tempFile, path);
+            }
+        }
+
+        private void buttonDeleteUser_Click(object sender, EventArgs e)
+        {
+            deleteUser(textBoxLogin.Text.ToString(), textBoxPassword.Text.ToString());
+            textBoxLogin.Clear();
+            textBoxPassword.Clear();
         }
     }
 }

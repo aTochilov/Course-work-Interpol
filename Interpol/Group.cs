@@ -73,11 +73,22 @@ namespace Interpol
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            textBoxActYears.Enabled = true;
-            textBoxLeader.Enabled = true;
-            textBoxName.Enabled = true;
-            textBoxNotation.Enabled = true;
-            buttonSave.Visible = true;
+            if (buttonSave.Visible == true)
+            {
+                textBoxActYears.Enabled = false;
+                textBoxLeader.Enabled = false;
+                textBoxName.Enabled = false;
+                textBoxNotation.Enabled = false;
+                buttonSave.Visible = false;
+            }
+            else
+            {
+                textBoxActYears.Enabled = true;
+                textBoxLeader.Enabled = true;
+                textBoxName.Enabled = true;
+                textBoxNotation.Enabled = true;
+                buttonSave.Visible = true;
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -127,6 +138,7 @@ namespace Interpol
                 }
                 conn.Close();
                 loadAddLink(groupCode);
+                buttonSave.Visible = false;
             }
         }
     }

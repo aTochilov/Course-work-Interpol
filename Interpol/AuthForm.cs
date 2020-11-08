@@ -14,6 +14,7 @@ namespace Interpol
 {
     public partial class AuthForm : Form
     {
+        private string path = @".\users.dat";
         public AuthForm()
         {
             InitializeComponent();
@@ -21,12 +22,10 @@ namespace Interpol
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            String login = textBoxLogin.Text;
-            String hashedPassword = findHashed(login);
-            String password = textBoxPassword.Text;
+            string login = textBoxLogin.Text;
+            string hashedPassword = findHashed(login);
+            string password = textBoxPassword.Text;
             ScryptEncoder encoder = new ScryptEncoder();
-
-            //Console.WriteLine("***\n"+encoder.Encode(password)+"\n***");
             if (password != "")
                 if (hashedPassword != "0" && encoder.Compare(password, hashedPassword))
                 {
@@ -50,7 +49,6 @@ namespace Interpol
 
         private string findHashed(string login)
         {
-            string path = @"..\\users.dat";
             string[] lines;
             if (!File.Exists(path))
             {
@@ -61,7 +59,7 @@ namespace Interpol
                 lines = File.ReadAllLines(path);
                 foreach(string line in lines)
                 {
-                    if (line.Contains(login))
+                    if ((line.Split(':')[0]) == login)
                     {
                         var hashedPassword = line.Split(':');
                         return hashedPassword[1];
@@ -73,7 +71,6 @@ namespace Interpol
 
         private string findLevel(string login)
         {
-            string path = @"..\\users.dat";
             string[] lines;
             if (!File.Exists(path))
             {
@@ -84,7 +81,8 @@ namespace Interpol
                 lines = File.ReadAllLines(path);
                 foreach (string line in lines)
                 {
-                    if (line.Contains(login))
+                    
+                    if ((line.Split(':')[0]) == login)
                     {
                         var level = line.Split(':');
                         return level[2];

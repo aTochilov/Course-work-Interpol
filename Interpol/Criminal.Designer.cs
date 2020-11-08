@@ -171,7 +171,7 @@
             this.Controls.Add(this.labelSurname);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.pictureBoxCriminal);
-            this.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
+            this.Margin = new System.Windows.Forms.Padding(20, 20, 20, 10);
             this.Name = "Criminal";
             this.Size = new System.Drawing.Size(850, 150);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCriminal)).EndInit();

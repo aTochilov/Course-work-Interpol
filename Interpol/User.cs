@@ -2,7 +2,6 @@
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
-using System.Security.AccessControl;
 using System.Windows.Forms;
 
 namespace Interpol
@@ -484,5 +483,82 @@ namespace Interpol
             return criminals;
         }
 
+        public Group[] getGroups()
+        {
+            byte group = 0;
+            Group[] groups = new Group[127];
+            OleDbConnection conn = new OleDbConnection(connString);
+            OleDbCommand commandGroups = new OleDbCommand("SELECT Group_code, Group_name, Group_leader, Group_info, Group_activity_years FROM Groups ;", conn);
+            conn.Open();
+            OleDbDataReader readerGroups = commandGroups.ExecuteReader();
+            while (readerGroups.Read())
+            {
+                groups[group] = new Group();
+                groups[group].GroupCode = Convert.ToInt32(readerGroups[0]);
+                groups[group].GroupName = Convert.ToString(readerGroups[1]);
+                groups[group].GroupLeader = Convert.ToString(readerGroups[2]);
+                groups[group].GroupInfo = Convert.ToString(readerGroups[3]);
+                groups[group].GroupActYears = Convert.ToString(readerGroups[4]);
+                groups[group].loadLinks(Convert.ToInt32(readerGroups[0]));
+                group++;
+            }
+            readerGroups.Close();
+            conn.Close();
+            return groups;
+        }
+
+        public Criminal[] getDeadCriminals()
+        {
+            int criminalCode = getFirstCriminalCode();
+            Criminal[] criminals = new Criminal[1000000];
+            int criminal = 0;
+            do
+            {
+                if (loadIsDead(criminalCode) == true)
+                {
+                    criminals[criminal] = new Criminal
+                    {
+                        name = loadName(criminalCode),
+                        surname = loadSurname(criminalCode),
+                        nickname = loadNickname(criminalCode),
+                        specialization = loadSpec(criminalCode),
+                        residence = loadResidence(criminalCode),
+                        date = loadDate(criminalCode),
+                        image = loadPhoto(criminalCode),
+                        code = criminalCode
+                    };
+                }
+                criminal++;
+                criminalCode++;
+            } while (criminal < getNumberOfRows());
+            return criminals;
+        }
+
+        public Criminal[] getGaveUpCriminals()
+        {
+            int criminalCode = getFirstCriminalCode();
+            Criminal[] criminals = new Criminal[1000000];
+            int criminal = 0;
+            do
+            {
+                if (loadGaveUp(criminalCode) == true)
+                {
+                    criminals[criminal] = new Criminal
+                    {
+                        name = loadName(criminalCode),
+                        surname = loadSurname(criminalCode),
+                        nickname = loadNickname(criminalCode),
+                        specialization = loadSpec(criminalCode),
+                        residence = loadResidence(criminalCode),
+                        date = loadDate(criminalCode),
+                        image = loadPhoto(criminalCode),
+                        code = criminalCode
+                    };
+                }
+                criminal++;
+                criminalCode++;
+            } while (criminal < getNumberOfRows());
+            return criminals;
+        }
     }
 }

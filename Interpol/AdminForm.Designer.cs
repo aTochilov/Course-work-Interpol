@@ -36,7 +36,7 @@
             this.panelMore = new System.Windows.Forms.Panel();
             this.buttonAddCrime = new System.Windows.Forms.Button();
             this.buttonAddCriminal = new System.Windows.Forms.Button();
-            this.buttonAddUser = new System.Windows.Forms.Button();
+            this.buttonShowAddUser = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonTableDead = new System.Windows.Forms.Button();
             this.buttonTableGaveUp = new System.Windows.Forms.Button();
@@ -105,6 +105,20 @@
             this.groupsCriminalsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.criminalsTableAdapter = new Interpol.cardfileDataSetTableAdapters.CriminalsTableAdapter();
             this.groupsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.panelAddUser = new System.Windows.Forms.Panel();
+            this.buttonDeleteUser = new System.Windows.Forms.Button();
+            this.buttonShowPassword = new System.Windows.Forms.Button();
+            this.buttonAddUser = new System.Windows.Forms.Button();
+            this.buttonShowDeleteUser = new System.Windows.Forms.Button();
+            this.groupBoxLevel = new System.Windows.Forms.GroupBox();
+            this.radioButtonLevel2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonLevel1 = new System.Windows.Forms.RadioButton();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.buttonHideAddUser = new System.Windows.Forms.Button();
             this.panelNavAdmin.SuspendLayout();
             this.panelMore.SuspendLayout();
             this.panelSearch.SuspendLayout();
@@ -116,6 +130,8 @@
             this.panelAddCrime.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupsCriminalsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource1)).BeginInit();
+            this.panelAddUser.SuspendLayout();
+            this.groupBoxLevel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNavAdmin
@@ -132,7 +148,7 @@
             this.panelNavAdmin.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelNavAdmin.Location = new System.Drawing.Point(0, 0);
             this.panelNavAdmin.Name = "panelNavAdmin";
-            this.panelNavAdmin.Size = new System.Drawing.Size(195, 661);
+            this.panelNavAdmin.Size = new System.Drawing.Size(197, 661);
             this.panelNavAdmin.TabIndex = 2;
             // 
             // buttonGroups
@@ -142,7 +158,7 @@
             this.buttonGroups.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGroups.Location = new System.Drawing.Point(0, 171);
             this.buttonGroups.Name = "buttonGroups";
-            this.buttonGroups.Size = new System.Drawing.Size(193, 51);
+            this.buttonGroups.Size = new System.Drawing.Size(191, 51);
             this.buttonGroups.TabIndex = 8;
             this.buttonGroups.Text = "Группировки";
             this.buttonGroups.UseVisualStyleBackColor = true;
@@ -155,9 +171,9 @@
             this.buttonMore.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMore.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMore.Location = new System.Drawing.Point(-3, 228);
+            this.buttonMore.Location = new System.Drawing.Point(0, 228);
             this.buttonMore.Name = "buttonMore";
-            this.buttonMore.Size = new System.Drawing.Size(195, 25);
+            this.buttonMore.Size = new System.Drawing.Size(191, 25);
             this.buttonMore.TabIndex = 7;
             this.buttonMore.UseVisualStyleBackColor = true;
             this.buttonMore.Click += new System.EventHandler(this.buttonMore_Click);
@@ -166,10 +182,10 @@
             // 
             this.panelMore.Controls.Add(this.buttonAddCrime);
             this.panelMore.Controls.Add(this.buttonAddCriminal);
-            this.panelMore.Controls.Add(this.buttonAddUser);
+            this.panelMore.Controls.Add(this.buttonShowAddUser);
             this.panelMore.Location = new System.Drawing.Point(0, 252);
             this.panelMore.Name = "panelMore";
-            this.panelMore.Size = new System.Drawing.Size(195, 302);
+            this.panelMore.Size = new System.Drawing.Size(196, 302);
             this.panelMore.TabIndex = 6;
             this.panelMore.Visible = false;
             // 
@@ -178,9 +194,9 @@
             this.buttonAddCrime.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonAddCrime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAddCrime.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddCrime.Location = new System.Drawing.Point(-3, 114);
+            this.buttonAddCrime.Location = new System.Drawing.Point(0, 114);
             this.buttonAddCrime.Name = "buttonAddCrime";
-            this.buttonAddCrime.Size = new System.Drawing.Size(195, 51);
+            this.buttonAddCrime.Size = new System.Drawing.Size(191, 51);
             this.buttonAddCrime.TabIndex = 9;
             this.buttonAddCrime.Text = "Добавить преступление";
             this.buttonAddCrime.UseVisualStyleBackColor = true;
@@ -193,24 +209,24 @@
             this.buttonAddCriminal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAddCriminal.Location = new System.Drawing.Point(0, 57);
             this.buttonAddCriminal.Name = "buttonAddCriminal";
-            this.buttonAddCriminal.Size = new System.Drawing.Size(193, 51);
+            this.buttonAddCriminal.Size = new System.Drawing.Size(191, 51);
             this.buttonAddCriminal.TabIndex = 8;
             this.buttonAddCriminal.Text = "Добавить преступника";
             this.buttonAddCriminal.UseVisualStyleBackColor = true;
             this.buttonAddCriminal.Click += new System.EventHandler(this.buttonAddCriminal_Click);
             // 
-            // buttonAddUser
+            // buttonShowAddUser
             // 
-            this.buttonAddUser.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAddUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddUser.Location = new System.Drawing.Point(0, 0);
-            this.buttonAddUser.Name = "buttonAddUser";
-            this.buttonAddUser.Size = new System.Drawing.Size(191, 51);
-            this.buttonAddUser.TabIndex = 7;
-            this.buttonAddUser.Text = "Добавить пользователя";
-            this.buttonAddUser.UseVisualStyleBackColor = true;
-            this.buttonAddUser.Click += new System.EventHandler(this.buttonAddUser_Click);
+            this.buttonShowAddUser.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonShowAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonShowAddUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShowAddUser.Location = new System.Drawing.Point(0, 0);
+            this.buttonShowAddUser.Name = "buttonShowAddUser";
+            this.buttonShowAddUser.Size = new System.Drawing.Size(191, 51);
+            this.buttonShowAddUser.TabIndex = 7;
+            this.buttonShowAddUser.Text = "Пользователи";
+            this.buttonShowAddUser.UseVisualStyleBackColor = true;
+            this.buttonShowAddUser.Click += new System.EventHandler(this.buttonShowAddUser_Click);
             // 
             // buttonBack
             // 
@@ -222,7 +238,7 @@
             this.buttonBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonBack.Location = new System.Drawing.Point(0, 606);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(191, 51);
+            this.buttonBack.Size = new System.Drawing.Size(193, 51);
             this.buttonBack.TabIndex = 3;
             this.buttonBack.Text = "Выйти";
             this.buttonBack.UseVisualStyleBackColor = true;
@@ -233,9 +249,9 @@
             this.buttonTableDead.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonTableDead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTableDead.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTableDead.Location = new System.Drawing.Point(-3, 114);
+            this.buttonTableDead.Location = new System.Drawing.Point(0, 114);
             this.buttonTableDead.Name = "buttonTableDead";
-            this.buttonTableDead.Size = new System.Drawing.Size(195, 51);
+            this.buttonTableDead.Size = new System.Drawing.Size(191, 51);
             this.buttonTableDead.TabIndex = 2;
             this.buttonTableDead.Text = "Умершие";
             this.buttonTableDead.UseVisualStyleBackColor = true;
@@ -246,9 +262,9 @@
             this.buttonTableGaveUp.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.buttonTableGaveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTableGaveUp.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTableGaveUp.Location = new System.Drawing.Point(-4, 57);
+            this.buttonTableGaveUp.Location = new System.Drawing.Point(0, 57);
             this.buttonTableGaveUp.Name = "buttonTableGaveUp";
-            this.buttonTableGaveUp.Size = new System.Drawing.Size(195, 51);
+            this.buttonTableGaveUp.Size = new System.Drawing.Size(191, 51);
             this.buttonTableGaveUp.TabIndex = 1;
             this.buttonTableGaveUp.Text = "Завязавшие";
             this.buttonTableGaveUp.UseVisualStyleBackColor = true;
@@ -261,7 +277,7 @@
             this.buttonMain.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMain.Location = new System.Drawing.Point(0, 0);
             this.buttonMain.Name = "buttonMain";
-            this.buttonMain.Size = new System.Drawing.Size(195, 51);
+            this.buttonMain.Size = new System.Drawing.Size(191, 51);
             this.buttonMain.TabIndex = 0;
             this.buttonMain.Text = "Главная";
             this.buttonMain.UseVisualStyleBackColor = true;
@@ -271,9 +287,9 @@
             // 
             this.flowLayoutPanel.AutoScroll = true;
             this.flowLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(195, 49);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(197, 52);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(939, 612);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(910, 609);
             this.flowLayoutPanel.TabIndex = 3;
             this.flowLayoutPanel.Click += new System.EventHandler(this.flowLayoutPanel_Click);
             // 
@@ -285,14 +301,14 @@
             this.panelSearch.Controls.Add(this.textBoxSearch);
             this.panelSearch.Location = new System.Drawing.Point(195, 1);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(937, 50);
+            this.panelSearch.Size = new System.Drawing.Size(910, 50);
             this.panelSearch.TabIndex = 0;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label19.Location = new System.Drawing.Point(270, 15);
+            this.label19.Location = new System.Drawing.Point(280, 15);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(226, 19);
             this.label19.TabIndex = 2;
@@ -302,6 +318,7 @@
             // 
             this.buttonSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSearch.BackgroundImage")));
             this.buttonSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSearch.FlatAppearance.BorderSize = 0;
             this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearch.Location = new System.Drawing.Point(232, 9);
             this.buttonSearch.Name = "buttonSearch";
@@ -358,7 +375,7 @@
             this.panelAddCriminal.Controls.Add(this.label2);
             this.panelAddCriminal.Controls.Add(this.label1);
             this.panelAddCriminal.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelAddCriminal.Location = new System.Drawing.Point(634, 0);
+            this.panelAddCriminal.Location = new System.Drawing.Point(301, 0);
             this.panelAddCriminal.Name = "panelAddCriminal";
             this.panelAddCriminal.Size = new System.Drawing.Size(500, 661);
             this.panelAddCriminal.TabIndex = 4;
@@ -772,6 +789,7 @@
             // panelAddCrime
             // 
             this.panelAddCrime.BackColor = System.Drawing.Color.SlateGray;
+            this.panelAddCrime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAddCrime.Controls.Add(this.buttonInsertCrime);
             this.panelAddCrime.Controls.Add(this.buttonHideAddCrimeMenu);
             this.panelAddCrime.Controls.Add(this.textBoxCrimeTerm);
@@ -781,7 +799,7 @@
             this.panelAddCrime.Controls.Add(this.label21);
             this.panelAddCrime.Controls.Add(this.label20);
             this.panelAddCrime.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelAddCrime.Location = new System.Drawing.Point(328, 0);
+            this.panelAddCrime.Location = new System.Drawing.Point(-5, 0);
             this.panelAddCrime.Name = "panelAddCrime";
             this.panelAddCrime.Size = new System.Drawing.Size(306, 661);
             this.panelAddCrime.TabIndex = 0;
@@ -807,9 +825,9 @@
             this.buttonHideAddCrimeMenu.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHideAddCrimeMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideAddCrimeMenu.Image")));
             this.buttonHideAddCrimeMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonHideAddCrimeMenu.Location = new System.Drawing.Point(0, 610);
+            this.buttonHideAddCrimeMenu.Location = new System.Drawing.Point(0, 608);
             this.buttonHideAddCrimeMenu.Name = "buttonHideAddCrimeMenu";
-            this.buttonHideAddCrimeMenu.Size = new System.Drawing.Size(306, 51);
+            this.buttonHideAddCrimeMenu.Size = new System.Drawing.Size(304, 51);
             this.buttonHideAddCrimeMenu.TabIndex = 23;
             this.buttonHideAddCrimeMenu.Text = "Скрыть";
             this.buttonHideAddCrimeMenu.UseVisualStyleBackColor = true;
@@ -817,23 +835,26 @@
             // 
             // textBoxCrimeTerm
             // 
+            this.textBoxCrimeTerm.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxCrimeTerm.Location = new System.Drawing.Point(14, 260);
             this.textBoxCrimeTerm.Name = "textBoxCrimeTerm";
-            this.textBoxCrimeTerm.Size = new System.Drawing.Size(282, 20);
+            this.textBoxCrimeTerm.Size = new System.Drawing.Size(282, 21);
             this.textBoxCrimeTerm.TabIndex = 22;
             // 
             // textBoxCrimeDesc
             // 
+            this.textBoxCrimeDesc.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxCrimeDesc.Location = new System.Drawing.Point(14, 200);
             this.textBoxCrimeDesc.Name = "textBoxCrimeDesc";
-            this.textBoxCrimeDesc.Size = new System.Drawing.Size(282, 20);
+            this.textBoxCrimeDesc.Size = new System.Drawing.Size(282, 21);
             this.textBoxCrimeDesc.TabIndex = 21;
             // 
             // textBoxCrimeType
             // 
+            this.textBoxCrimeType.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxCrimeType.Location = new System.Drawing.Point(14, 140);
             this.textBoxCrimeType.Name = "textBoxCrimeType";
-            this.textBoxCrimeType.Size = new System.Drawing.Size(282, 20);
+            this.textBoxCrimeType.Size = new System.Drawing.Size(282, 21);
             this.textBoxCrimeType.TabIndex = 20;
             // 
             // label22
@@ -888,19 +909,197 @@
             this.groupsBindingSource1.DataMember = "Groups";
             this.groupsBindingSource1.DataSource = this.cardfileDataSet;
             // 
+            // panelAddUser
+            // 
+            this.panelAddUser.BackColor = System.Drawing.Color.SlateGray;
+            this.panelAddUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAddUser.Controls.Add(this.buttonDeleteUser);
+            this.panelAddUser.Controls.Add(this.buttonShowPassword);
+            this.panelAddUser.Controls.Add(this.buttonAddUser);
+            this.panelAddUser.Controls.Add(this.buttonShowDeleteUser);
+            this.panelAddUser.Controls.Add(this.groupBoxLevel);
+            this.panelAddUser.Controls.Add(this.labelUser);
+            this.panelAddUser.Controls.Add(this.label24);
+            this.panelAddUser.Controls.Add(this.label23);
+            this.panelAddUser.Controls.Add(this.textBoxPassword);
+            this.panelAddUser.Controls.Add(this.textBoxLogin);
+            this.panelAddUser.Controls.Add(this.buttonHideAddUser);
+            this.panelAddUser.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelAddUser.Location = new System.Drawing.Point(801, 0);
+            this.panelAddUser.Name = "panelAddUser";
+            this.panelAddUser.Size = new System.Drawing.Size(306, 661);
+            this.panelAddUser.TabIndex = 0;
+            this.panelAddUser.Visible = false;
+            // 
+            // buttonDeleteUser
+            // 
+            this.buttonDeleteUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonDeleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonDeleteUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeleteUser.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonDeleteUser.Location = new System.Drawing.Point(149, 486);
+            this.buttonDeleteUser.Name = "buttonDeleteUser";
+            this.buttonDeleteUser.Size = new System.Drawing.Size(151, 39);
+            this.buttonDeleteUser.TabIndex = 35;
+            this.buttonDeleteUser.Text = "Удалить";
+            this.buttonDeleteUser.UseVisualStyleBackColor = true;
+            this.buttonDeleteUser.Visible = false;
+            this.buttonDeleteUser.Click += new System.EventHandler(this.buttonDeleteUser_Click);
+            // 
+            // buttonShowPassword
+            // 
+            this.buttonShowPassword.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonShowPassword.BackgroundImage")));
+            this.buttonShowPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonShowPassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonShowPassword.Location = new System.Drawing.Point(274, 318);
+            this.buttonShowPassword.Name = "buttonShowPassword";
+            this.buttonShowPassword.Size = new System.Drawing.Size(26, 26);
+            this.buttonShowPassword.TabIndex = 34;
+            this.buttonShowPassword.UseVisualStyleBackColor = true;
+            this.buttonShowPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonShowPassword_MouseDown);
+            this.buttonShowPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonShowPassword_MouseUp);
+            // 
+            // buttonAddUser
+            // 
+            this.buttonAddUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonAddUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAddUser.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonAddUser.Location = new System.Drawing.Point(9, 486);
+            this.buttonAddUser.Name = "buttonAddUser";
+            this.buttonAddUser.Size = new System.Drawing.Size(151, 39);
+            this.buttonAddUser.TabIndex = 32;
+            this.buttonAddUser.Text = "Сохранить";
+            this.buttonAddUser.UseVisualStyleBackColor = true;
+            this.buttonAddUser.Click += new System.EventHandler(this.buttonAddUser_Click);
+            // 
+            // buttonShowDeleteUser
+            // 
+            this.buttonShowDeleteUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonShowDeleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonShowDeleteUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShowDeleteUser.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonShowDeleteUser.Location = new System.Drawing.Point(66, 20);
+            this.buttonShowDeleteUser.Name = "buttonShowDeleteUser";
+            this.buttonShowDeleteUser.Size = new System.Drawing.Size(221, 39);
+            this.buttonShowDeleteUser.TabIndex = 31;
+            this.buttonShowDeleteUser.Text = "Удалить пользователя";
+            this.buttonShowDeleteUser.UseVisualStyleBackColor = true;
+            this.buttonShowDeleteUser.Click += new System.EventHandler(this.buttonShowDeleteUser_Click);
+            // 
+            // groupBoxLevel
+            // 
+            this.groupBoxLevel.Controls.Add(this.radioButtonLevel2);
+            this.groupBoxLevel.Controls.Add(this.radioButtonLevel1);
+            this.groupBoxLevel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxLevel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBoxLevel.Location = new System.Drawing.Point(37, 358);
+            this.groupBoxLevel.Name = "groupBoxLevel";
+            this.groupBoxLevel.Size = new System.Drawing.Size(200, 100);
+            this.groupBoxLevel.TabIndex = 30;
+            this.groupBoxLevel.TabStop = false;
+            this.groupBoxLevel.Text = "Уровень доступа:";
+            // 
+            // radioButtonLevel2
+            // 
+            this.radioButtonLevel2.AutoSize = true;
+            this.radioButtonLevel2.Location = new System.Drawing.Point(18, 58);
+            this.radioButtonLevel2.Name = "radioButtonLevel2";
+            this.radioButtonLevel2.Size = new System.Drawing.Size(160, 23);
+            this.radioButtonLevel2.TabIndex = 1;
+            this.radioButtonLevel2.TabStop = true;
+            this.radioButtonLevel2.Text = "2 (Администратор)";
+            this.radioButtonLevel2.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonLevel1
+            // 
+            this.radioButtonLevel1.AutoSize = true;
+            this.radioButtonLevel1.Checked = true;
+            this.radioButtonLevel1.Location = new System.Drawing.Point(18, 26);
+            this.radioButtonLevel1.Name = "radioButtonLevel1";
+            this.radioButtonLevel1.Size = new System.Drawing.Size(86, 23);
+            this.radioButtonLevel1.TabIndex = 0;
+            this.radioButtonLevel1.TabStop = true;
+            this.radioButtonLevel1.Text = "1 (Гость)";
+            this.radioButtonLevel1.UseVisualStyleBackColor = true;
+            // 
+            // labelUser
+            // 
+            this.labelUser.AutoSize = true;
+            this.labelUser.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUser.Location = new System.Drawing.Point(33, 173);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(240, 22);
+            this.labelUser.TabIndex = 29;
+            this.labelUser.Text = "Добавление пользователя:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label24.Location = new System.Drawing.Point(33, 297);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(66, 19);
+            this.label24.TabIndex = 28;
+            this.label24.Text = "Пароль:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(33, 236);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(56, 19);
+            this.label23.TabIndex = 27;
+            this.label23.Text = "Логин:";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPassword.Location = new System.Drawing.Point(9, 319);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(264, 24);
+            this.textBoxPassword.TabIndex = 26;
+            // 
+            // textBoxLogin
+            // 
+            this.textBoxLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxLogin.Location = new System.Drawing.Point(9, 258);
+            this.textBoxLogin.Name = "textBoxLogin";
+            this.textBoxLogin.Size = new System.Drawing.Size(264, 24);
+            this.textBoxLogin.TabIndex = 25;
+            // 
+            // buttonHideAddUser
+            // 
+            this.buttonHideAddUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonHideAddUser.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonHideAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonHideAddUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHideAddUser.Image = ((System.Drawing.Image)(resources.GetObject("buttonHideAddUser.Image")));
+            this.buttonHideAddUser.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonHideAddUser.Location = new System.Drawing.Point(0, 608);
+            this.buttonHideAddUser.Name = "buttonHideAddUser";
+            this.buttonHideAddUser.Size = new System.Drawing.Size(304, 51);
+            this.buttonHideAddUser.TabIndex = 24;
+            this.buttonHideAddUser.Text = "Скрыть";
+            this.buttonHideAddUser.UseVisualStyleBackColor = true;
+            this.buttonHideAddUser.Click += new System.EventHandler(this.buttonHideAddUser_Click);
+            // 
             // AdminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(1134, 661);
-            this.Controls.Add(this.panelNavAdmin);
+            this.ClientSize = new System.Drawing.Size(1107, 661);
             this.Controls.Add(this.panelAddCrime);
+            this.Controls.Add(this.panelNavAdmin);
             this.Controls.Add(this.panelAddCriminal);
-            this.Controls.Add(this.panelSearch);
+            this.Controls.Add(this.panelAddUser);
             this.Controls.Add(this.flowLayoutPanel);
-            this.MaximumSize = new System.Drawing.Size(1150, 700);
-            this.MinimumSize = new System.Drawing.Size(1150, 700);
+            this.Controls.Add(this.panelSearch);
+            this.MaximumSize = new System.Drawing.Size(1123, 700);
+            this.MinimumSize = new System.Drawing.Size(1123, 700);
             this.Name = "AdminForm";
             this.Text = "Картотека | Доступ: 2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);
@@ -920,6 +1119,10 @@
             this.panelAddCrime.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupsCriminalsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource1)).EndInit();
+            this.panelAddUser.ResumeLayout(false);
+            this.panelAddUser.PerformLayout();
+            this.groupBoxLevel.ResumeLayout(false);
+            this.groupBoxLevel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -933,7 +1136,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
         private System.Windows.Forms.Button buttonMore;
         private System.Windows.Forms.Panel panelMore;
-        private System.Windows.Forms.Button buttonAddUser;
+        private System.Windows.Forms.Button buttonShowAddUser;
         private System.Windows.Forms.Panel panelAddCriminal;
         private System.Windows.Forms.CheckBox checkBoxGaveUp;
         private System.Windows.Forms.TextBox textBoxName;
@@ -1000,5 +1203,19 @@
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.Panel panelAddUser;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.TextBox textBoxLogin;
+        private System.Windows.Forms.Button buttonHideAddUser;
+        private System.Windows.Forms.GroupBox groupBoxLevel;
+        private System.Windows.Forms.Label labelUser;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button buttonShowDeleteUser;
+        private System.Windows.Forms.Button buttonAddUser;
+        private System.Windows.Forms.RadioButton radioButtonLevel2;
+        private System.Windows.Forms.RadioButton radioButtonLevel1;
+        private System.Windows.Forms.Button buttonShowPassword;
+        private System.Windows.Forms.Button buttonDeleteUser;
     }
 }
