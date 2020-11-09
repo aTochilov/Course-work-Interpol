@@ -20,6 +20,10 @@ namespace Interpol
         public Group()
         {
             InitializeComponent();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Visible == true && f.Name == "GuestForm") buttonEdit.Visible = false;
+            }
         }
         public Group(bool isAddGroup)
         {
@@ -62,7 +66,11 @@ namespace Interpol
             }
             readerGroups.Close();
             conn.Close();
-            loadAddLink(groupCode);
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Visible == true && f.Name == "AdminForm") loadAddLink(groupCode); ;
+            }
+            
         }
 
         public void loadAddLink(int groupCode)

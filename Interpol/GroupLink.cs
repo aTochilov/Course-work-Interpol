@@ -24,6 +24,10 @@ namespace Interpol
         {
             InitializeComponent();
             this.groupCode = groupCode;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Visible == true && f.Name == "GuestForm") buttonEdit.Visible = false;
+            }
         }
         public GroupLink(bool addLink, int groupCode)
         {
